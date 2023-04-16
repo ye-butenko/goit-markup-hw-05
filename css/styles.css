@@ -16,6 +16,8 @@
     /* Header background, team card background */
     --color-white: #ffffff;
     --color-dairy: #fcfcfc;
+
+    --transition-primary: 251ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* DROPPING */
@@ -32,6 +34,10 @@ ul {
     margin-top: 0;
     margin-bottom: 0;
     padding-left: 0;
+}
+
+button {
+    cursor: pointer;
 }
 
 img {
@@ -129,11 +135,13 @@ body {
     padding: 12px 24px;
     border: 1px solid var(--color-cornflower);
     border-radius: 4px;
+    transition:
+        color var(--transition-primary),
+        background-color var(--transition-primary);
 }
 
 .btn:hover,
 .btn:focus {
-    cursor: pointer;
     background-color: var(--color-ocean);
     color: var(--color-white);
     border: 1px solid transparent;
@@ -187,10 +195,15 @@ body {
     gap: 40px;
 }
 
+.header-nav-item {
+    position: relative;
+}
+
 .header-nav-link {
     font-weight: 500;
     color: var(--color-navy-blue);
     padding: 24px 0;
+    transition: color var(--transition-primary);
 }
 
 .header-nav-link:hover,
@@ -198,8 +211,19 @@ body {
     color: var(--color-ocean);
 }
 
-.header-nav-link.current {
+.current {
     color: var(--color-ocean);
+}
+
+.current::after {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 4px;
+    border-radius: 2px;
+    top: 44px;
+    background-color: currentColor;
 }
 
 .contact {
@@ -212,6 +236,7 @@ body {
 
 .contact-link {
     padding: 24px 0;
+    transition: color var(--transition-primary);
 }
 
 .contact-link:hover,
@@ -249,7 +274,6 @@ body {
     color: var(--color-white);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
     border: none;
-    cursor: pointer;
 }
 
 .hero-btn:hover,
@@ -269,6 +293,17 @@ body {
     flex-basis: calc((100% - 72px) / 4);
 }
 
+.feature-img {
+    width: 264px;
+    height: 112px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--color-cloud);
+    border-radius: 4px;
+    margin-bottom: 8px;
+}
+
 /* section 3 Activity */
 .section-activity {
     padding-top: 0px;
@@ -280,17 +315,6 @@ body {
 
 .activiti-item {
     flex-basis: calc((100% - 48px) / 3);
-}
-
-.feature-img {
-    width: 264px;
-    height: 112px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: var(--color-cloud);
-    border-radius: 4px;
-    margin-bottom: 8px;
 }
 
 /* section 4 Team ↓↓↓ */
@@ -306,7 +330,10 @@ body {
     text-align: center;
     background-color: var(--color-white);
     flex-basis: calc((100% - 72px) / 4);
-    box-shadow: 0px 1px 6px rgba(46, 47, 66, 0.08), 0px 1px 1px rgba(46, 47, 66, 0.16), 0px 2px 1px rgba(46, 47, 66, 0.08);
+    box-shadow:
+        0px 1px 6px rgba(46, 47, 66, 0.08),
+        0px 1px 1px rgba(46, 47, 66, 0.16),
+        0px 2px 1px rgba(46, 47, 66, 0.08);
     border-radius: 0px 0px 4px 4px;
 }
 
@@ -330,6 +357,7 @@ body {
     height: 40px;
     border-radius: 50%;
     background-color: var(--color-iris);
+    transition: background-color var(--transition-primary);
 }
 
 .social-link:hover,
@@ -359,6 +387,9 @@ body {
     color: var(--color-light-slate);
     border: 1px solid var(--color-light-slate);
     border-radius: 4px;
+    transition:
+        color var(--transition-primary),
+        border-color var(--transition-primary);
 }
 
 .customers-link:hover,
@@ -369,11 +400,6 @@ body {
 
 .customers-icon {
     fill: currentColor;
-}
-
-.customers-link:hover .customers-icon,
-.customers-link:focus .customers-icon {
-    fill: var(--color-ocean);
 }
 
 /* PORTFOLIO ↓↓↓ */
@@ -398,6 +424,7 @@ body {
 
 .projects-link {
     display: block;
+    transition: box-shadow var(--transition-primary);
 }
 
 .projects-link:hover,
@@ -406,12 +433,37 @@ body {
         0px 1px 6px rgba(46, 47, 66, 0.08),
         0px 1px 1px rgba(46, 47, 66, 0.16),
         0px 2px 1px rgba(46, 47, 66, 0.08);
+
+}
+
+.overlay {
+    position: relative;
+    overflow: hidden;
+}
+
+.overlay-text {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    padding: 40px 32px;
+    color: var(--color-cloud);
+    background-color: var(--color-iris);
+    transform: translateY(100%);
+    transition: transform var(--transition-primary);
+}
+
+.projects-link:hover .overlay-text,
+.projects-link:focus .overlay-text {
+    transform: translateY(0);
 }
 
 .projects-card-desc {
     padding: 32px 16px;
     border: 1px solid var(--color-cornflower);
     border-top: none;
+    transition: border-color var(--transition-primary);
 }
 
 .projects-card:hover .projects-card-desc,
@@ -465,4 +517,73 @@ body {
 .footer .social-link:hover,
 .footer .social-link:focus {
     background-color: var(--color-green);
+}
+
+/* MODAL WINDOW */
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(46, 47, 66, 0.4);
+
+    transition:
+        opacity var(--transition-primary),
+        visibility var(--transition-primary);
+}
+
+.backdrop.is-hidden {
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 408px;
+    height: 576px;
+    background-color: var(--color-dairy);
+    box-shadow:
+        0px 1px 1px rgba(0, 0, 0, 0.14),
+        0px 1px 3px rgba(0, 0, 0, 0.12),
+        0px 2px 1px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+}
+
+.modal-btn-close {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: var(--color-navy-blue);
+    background-color: var(--color-cornflower);
+
+    transition:
+        color var(--transition-primary),
+        background-color var(--transition-primary);
+}
+
+.modal-btn-close:hover,
+.modal-btn-close:focus {
+    color: var(--color-white);
+    background-color: var(--color-ocean);
+}
+
+.modal-btn-close-icon {
+    fill: currentColor;
 }

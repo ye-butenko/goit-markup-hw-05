@@ -57,7 +57,7 @@
         <section class="section section-hero">
             <div class="container">
                 <h1 class="title-hero">Effective Solutions for Your Business</h1>
-                <button type="button" class="hero-btn btn">Order Service</button>
+                <button class="hero-btn btn" type="button" data-modal-open>Order Service</button>
             </div>
         </section>
         <!-- section 2 Digitalization -->
@@ -378,6 +378,18 @@
             </div>
         </div>
     </footer>
+    <!-- Modal -->
+    <div class="backdrop is-hidden" data-modal>
+        <div class="modal">
+            <button class="modal-btn-close" type="button" data-modal-close>
+                <svg class="modal-btn-close-icon" width="8" height="8">
+                    <use href="./images/icon.svg#icon-modal-btn-close"></use>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <script src="./js/modal.js"></script>
 </body>
 
 </html>
