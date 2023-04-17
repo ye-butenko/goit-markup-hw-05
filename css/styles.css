@@ -17,7 +17,7 @@
     --color-white: #ffffff;
     --color-dairy: #fcfcfc;
 
-    --transition-primary: 251ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-primary: 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* DROPPING */
@@ -522,6 +522,7 @@ body {
 /* MODAL WINDOW */
 .backdrop {
     position: fixed;
+    opacity: 1;
     top: 0;
     left: 0;
     width: 100%;
@@ -543,7 +544,7 @@ body {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) scale(1);
 
     width: 408px;
     height: 576px;
@@ -553,6 +554,8 @@ body {
         0px 1px 3px rgba(0, 0, 0, 0.12),
         0px 2px 1px rgba(0, 0, 0, 0.2);
     border-radius: 4px;
+
+    transition: transform var(--transition-primary);
 }
 
 .modal-btn-close {
